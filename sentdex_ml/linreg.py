@@ -30,8 +30,9 @@ df['label'] = df[forecast_col].shift(-forecast_out)
 
 X = df.drop(columns=['label'])
 X = preprocessing.scale(X)
-X = X[:-forecast_out]
 X_lately = X[-forecast_out:]
+X = X[:-forecast_out]
+
 
 df.dropna(inplace=True)
 y = df['label']
