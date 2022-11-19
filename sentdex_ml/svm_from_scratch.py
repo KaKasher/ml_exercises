@@ -80,13 +80,17 @@ class Support_Vector_Machine:
             self.b = opt_choice[1]
             latest_optimum = opt_choice[0][0]+step*2
 
+            for i in self.data:
+                for xi in self.data[i]:
+                    yi = i
+                    print(xi, ':', yi * (np.dot(self.w, xi) + self.b))
+
 
     def predict(self, features):
         # sign(x.w + b)
-        classification = np.sign(np.dot(np.array(features), self.w) + self.b)
-        if classification != 0 and self.visualization:
+        classification = np.sign(np.dot(np.array(features),self.w)+self.b)
+        if classification !=0 and self.visualization:
             self.ax.scatter(features[0], features[1], s=200, marker='*', c=self.colors[classification])
-
         return classification
 
 
@@ -139,6 +143,6 @@ to_predict = [[1, 2],
               [5, 7],
               [2, -3],
               [1, 1]]
-
-svm.predict(to_predict)
+for p in to_predict:
+    svm.predict(p)
 svm.visualize()
